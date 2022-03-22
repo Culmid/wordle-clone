@@ -16,6 +16,7 @@ button {
     border: none;
     background-color: black;
     padding: 0;
+    color: white;
 }
 
 /* Header */
@@ -81,7 +82,7 @@ main {
     box-sizing: border-box;
 }
 
-.row {
+.game-grid .row {
     display: flex;
     justify-content: space-between;
 
@@ -97,5 +98,32 @@ main {
 }
 
 .game-keyboard {
-    height: 200px;
+    height: 190px;
+    margin: 8px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.game-keyboard .row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.game-keyboard .mid {
+    padding: 0 22px;
+}
+
+.key {
+    height: 58px;
+    width: 42px;
+    font-weight: bold;
+    background-color: #818384;
+    text-transform: uppercase;
+    border-radius: 4px;
+}
+
+.big {
+    width: 65px;
 }
