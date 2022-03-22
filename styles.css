@@ -17,6 +17,7 @@ button {
     background-color: black;
     padding: 0;
     color: white;
+    cursor: pointer;
 }
 
 /* Header */
