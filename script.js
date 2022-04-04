@@ -29,6 +29,7 @@ function main() {
   keys.forEach((x) =>
     x.addEventListener("click", () => {
       if (currentCell < limit) {
+        cells[currentCell].style.borderColor = "#565758";
         cells[currentCell++].textContent = x.textContent;
       }
     })
@@ -43,6 +44,8 @@ function main() {
       if (words.includes(word)) {
         for (let i = limit - 5; i < limit; i++) {
           setTimeout(() => {
+            cells[i].classList.add("cell-transition");
+
             if (cells[i].textContent === currentWord[i % 5]) {
               cells[i].classList.add("correct");
             } else if (currentWord.includes(cells[i].textContent)) {
@@ -70,6 +73,7 @@ function main() {
   document.getElementById("back").addEventListener("click", () => {
     if (currentCell > limit - 5) {
       cells[--currentCell].textContent = "";
+      cells[currentCell].style.borderColor = "#3a3a3c";
     }
   });
 }

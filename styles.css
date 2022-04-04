@@ -109,7 +109,9 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+}
 
+.cell-transition {
   transition: all 750ms ease-in-out;
 }
 
