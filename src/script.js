@@ -1,25 +1,22 @@
-let words = [
-  "which",
-  "there",
-  "their",
-  "about",
-  "would",
-  "these",
-  "other",
-  "words",
-  "could",
-  "hello",
-];
+import header from "./components/header";
+import main from "./components/main";
+import Data from "./assets/data/words.json";
+import "./assets/styles/styles.css";
 
+document.body.appendChild(header());
+document.body.appendChild(main());
+
+let words = Data.filter((x) => x.length == 5);
 let currentCell = 0;
 let limit = 5;
 
 document.addEventListener("DOMContentLoaded", () => {
-  main();
+  eventHandler();
 });
 
-function main() {
-  let currentWord = [..."hello"];
+function eventHandler() {
+  let randomIndex = Math.floor(Math.random() * (words.length + 1));
+  let currentWord = [...words[randomIndex]];
 
   const keys = Array.from(document.getElementsByClassName("key")).filter(
     (x) => x.classList.length == 1
