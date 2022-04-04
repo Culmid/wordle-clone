@@ -59,14 +59,11 @@ function main() {
         limit += 5;
       } else {
         raiseAlert("Not in word list");
-
-        // Jiggle Row
-        const row = cells[limit - 5].parentElement;
-        row.classList.add("animate-row");
-        setTimeout(() => {
-          row.classList.remove("animate-row");
-        }, 250);
+        jiggleRow(cells[limit - 5].parentElement);
       }
+    } else {
+      raiseAlert("Not enough letters");
+      jiggleRow(cells[currentCell].parentElement);
     }
   });
 
@@ -93,4 +90,11 @@ function raiseAlert(msg) {
   setTimeout(() => {
     wrapper.removeChild(alert);
   }, 1500);
+}
+
+function jiggleRow(row) {
+  row.classList.add("animate-row");
+  setTimeout(() => {
+    row.classList.remove("animate-row");
+  }, 250);
 }
