@@ -54,13 +54,11 @@ main {
   flex: 1;
   display: flex;
   justify-content: center;
-  /* background-color: aqua; */
 }
 
 .game-wrapper {
   max-width: 500px;
   width: 100%;
-  /* background-color: green; */
   display: flex;
   flex-direction: column;
 }
@@ -77,8 +75,6 @@ main {
   width: 350px;
   height: 420px;
   padding: 10px;
-  /* background-color: white; */
-  /* border: 2px solid black; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -107,6 +103,26 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition: all 750ms ease-in-out;
+}
+
+.correct {
+  background-color: #538d4e;
+  border: none;
+  transform: rotateX(180deg) scale(1, -1);
+}
+
+.wrong-place {
+  background-color: #b59f3b;
+  border: none;
+  transform: rotateX(180deg) scale(1, -1);
+}
+
+.incorrect {
+  background-color: #3a3a3c;
+  border: none;
+  transform: rotateX(180deg) scale(1, -1);
 }
 
 .game-keyboard {

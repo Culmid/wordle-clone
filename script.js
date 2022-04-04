@@ -36,13 +36,15 @@ function main() {
   document.getElementById("enter").addEventListener("click", () => {
     if (currentCell == limit) {
       for (let i = limit - 5; i < limit; i++) {
-        if (cells[i].textContent === currentWord[i % 5]) {
-          cells[i].style.backgroundColor = "#538d4e";
-        } else if (currentWord.includes(cells[i].textContent)) {
-          cells[i].style.backgroundColor = "#b59f3b";
-        } else {
-          cells[i].style.backgroundColor = "#3a3a3c";
-        }
+        setTimeout(() => {
+          if (cells[i].textContent === currentWord[i % 5]) {
+            cells[i].classList.add("correct");
+          } else if (currentWord.includes(cells[i].textContent)) {
+            cells[i].classList.add("wrong-place");
+          } else {
+            cells[i].classList.add("incorrect");
+          }
+        }, 250 * (i % 5));
       }
 
       limit += 5;
