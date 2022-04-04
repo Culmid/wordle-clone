@@ -89,6 +89,12 @@ main {
   height: 100%;
 }
 
+.animate-row {
+  animation: shake;
+  animation-duration: 150ms;
+  animation-iteration-count: 4;
+}
+
 .cell {
   max-width: 62px;
   width: 100%;
@@ -170,4 +176,14 @@ main {
   top: calc(100% / 8);
   left: calc(100% / 2 - 75px);
   transition: all 250ms linear;
+}
+
+@keyframes shake {
+  25% {
+    transform: translate(5px, 0);
+  }
+
+  75% {
+    transform: translate(-5px, 0);
+  }
 }

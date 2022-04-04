@@ -56,6 +56,13 @@ function main() {
         limit += 5;
       } else {
         raiseAlert("Not in word list");
+
+        // Jiggle Row
+        const row = cells[limit - 5].parentElement;
+        row.classList.add("animate-row");
+        setTimeout(() => {
+          row.classList.remove("animate-row");
+        }, 250);
       }
     }
   });
