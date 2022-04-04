@@ -155,3 +155,19 @@ main {
 .big {
   width: 65px;
 }
+
+.alert {
+  font-weight: bold;
+  border-radius: 5px;
+  color: black;
+  width: 150px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  position: absolute;
+  top: calc(100% / 8);
+  left: calc(100% / 2 - 75px);
+  transition: all 250ms linear;
+}

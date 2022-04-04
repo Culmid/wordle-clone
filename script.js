@@ -8,6 +8,7 @@ let words = [
   "other",
   "words",
   "could",
+  "hello",
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -35,19 +36,27 @@ function main() {
 
   document.getElementById("enter").addEventListener("click", () => {
     if (currentCell == limit) {
-      for (let i = limit - 5; i < limit; i++) {
-        setTimeout(() => {
-          if (cells[i].textContent === currentWord[i % 5]) {
-            cells[i].classList.add("correct");
-          } else if (currentWord.includes(cells[i].textContent)) {
-            cells[i].classList.add("wrong-place");
-          } else {
-            cells[i].classList.add("incorrect");
-          }
-        }, 250 * (i % 5));
-      }
+      const word = cells
+        .slice(limit - 5, limit)
+        .reduce((p, c) => p + c.textContent, "");
 
-      limit += 5;
+      if (words.includes(word)) {
+        for (let i = limit - 5; i < limit; i++) {
+          setTimeout(() => {
+            if (cells[i].textContent === currentWord[i % 5]) {
+              cells[i].classList.add("correct");
+            } else if (currentWord.includes(cells[i].textContent)) {
+              cells[i].classList.add("wrong-place");
+            } else {
+              cells[i].classList.add("incorrect");
+            }
+          }, 250 * (i % 5));
+        }
+
+        limit += 5;
+      } else {
+        raiseAlert("Not in word list");
+      }
     }
   });
 
@@ -56,4 +65,21 @@ function main() {
       cells[--currentCell].textContent = "";
     }
   });
+}
+
+function raiseAlert(msg) {
+  const alert = document.createElement("div");
+  alert.textContent = msg;
+  alert.className = "alert";
+
+  const wrapper = document.getElementsByClassName("game-wrapper")[0];
+  wrapper.appendChild(alert);
+
+  setTimeout(() => {
+    alert.style.opacity = "0";
+  }, 1000);
+
+  setTimeout(() => {
+    wrapper.removeChild(alert);
+  }, 1500);
 }
