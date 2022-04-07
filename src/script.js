@@ -9,6 +9,7 @@ document.body.appendChild(main());
 let words = Data.filter((x) => x.length == 5);
 let currentCell = 0;
 let limit = 5;
+const correctLetters = [];
 
 document.addEventListener("DOMContentLoaded", () => {
   eventHandler();
@@ -29,7 +30,7 @@ function eventHandler() {
 
   document
     .getElementById("enter")
-    .addEventListener("click", () => submitGuess(cells, currentWord));
+    .addEventListener("click", () => submitGuess(cells, currentWord, keys));
 
   document
     .getElementById("back")
@@ -39,7 +40,7 @@ function eventHandler() {
     if (e.code.startsWith("Key")) {
       fillCell(cells, e.code.charAt(e.code.length - 1).toLowerCase());
     } else if (e.code === "Enter") {
-      submitGuess(cells, currentWord);
+      submitGuess(cells, currentWord, keys);
     } else if (e.code === "Backspace") {
       emptyCell(cells);
     }
@@ -84,7 +85,7 @@ function emptyCell(cells) {
   }
 }
 
-function submitGuess(cells, currentWord) {
+function submitGuess(cells, currentWord, keys) {
   if (currentCell == limit) {
     const word = cells
       .slice(limit - 5, limit)
@@ -94,13 +95,20 @@ function submitGuess(cells, currentWord) {
       for (let i = limit - 5; i < limit; i++) {
         setTimeout(() => {
           cells[i].classList.add("cell-transition");
+          const key = keys.find((x) => x.textContent == cells[i].textContent);
 
           if (cells[i].textContent === currentWord[i % 5]) {
             cells[i].classList.add("correct");
+            key.style.backgroundColor = "#538d4e";
+            correctLetters.push(key.textContent);
           } else if (currentWord.includes(cells[i].textContent)) {
             cells[i].classList.add("wrong-place");
+            if (!correctLetters.includes(key.textContent)) {
+              key.style.backgroundColor = "#b59f3b";
+            }
           } else {
             cells[i].classList.add("incorrect");
+            key.style.backgroundColor = "#3a3a3c";
           }
         }, 250 * (i % 5));
       }
