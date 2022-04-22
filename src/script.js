@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function eventHandler() {
   let randomIndex = Math.floor(Math.random() * (words.length + 1));
   let currentWord = [...words[randomIndex]];
-  console.log(currentWord);
 
   const keys = Array.from(document.getElementsByClassName("key")).filter(
     (x) => x.classList.length == 1
