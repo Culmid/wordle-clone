@@ -2,6 +2,7 @@ import header from "./components/header";
 import main from "./components/main";
 import Data from "./assets/data/words.json";
 import "./assets/styles/styles.css";
+import X from "./assets/images/x-solid.svg";
 
 document.body.appendChild(header());
 document.body.appendChild(main());
@@ -9,7 +10,7 @@ document.body.appendChild(main());
 let words = Data.filter((x) => x.length == 5);
 let currentCell = 0;
 let limit = 5;
-const correctLetters = [];
+const correctLetters = Array(5).fill("");
 
 document.addEventListener("DOMContentLoaded", () => {
   eventHandler();
@@ -18,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function eventHandler() {
   let randomIndex = Math.floor(Math.random() * (words.length + 1));
   let currentWord = [...words[randomIndex]];
+  console.log(currentWord);
 
   const keys = Array.from(document.getElementsByClassName("key")).filter(
     (x) => x.classList.length == 1
@@ -71,6 +73,31 @@ function jiggleRow(row) {
   }, 250);
 }
 
+function raiseBanner(msg) {
+  const banner = document.createElement("div");
+  banner.className = "banner";
+  banner.textContent = msg;
+
+  const close = document.createElement("button");
+  close.className = "banner-close";
+
+  const closeImg = new Image();
+  closeImg.src = X;
+  closeImg.alt = "Close";
+  closeImg.style.width = "15px";
+  closeImg.style.height = "15px";
+  close.appendChild(closeImg);
+
+  close.addEventListener("click", () => {
+    window.location.reload();
+  });
+  banner.appendChild(close);
+
+  document.body.appendChild(banner);
+  document.getElementsByTagName("header")[0].style.filter = "blur(10px)";
+  document.getElementsByTagName("main")[0].style.filter = "blur(10px)";
+}
+
 function fillCell(cells, txt) {
   if (currentCell < limit) {
     cells[currentCell].style.borderColor = "#565758";
@@ -112,6 +139,15 @@ function submitGuess(cells, currentWord, keys) {
           }
         }, 250 * (i % 5));
       }
+
+      setTimeout(() => {
+        if (word === currentWord.join("")) {
+          raiseBanner("Congrats");
+        }
+        if (word !== currentWord.join("") && limit > 30) {
+          raiseBanner("Hard Luck");
+        }
+      }, 1500);
 
       limit += 5;
     } else {
